@@ -2,6 +2,7 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
 import ListaAcoes from './pages/ListaAcoes';
+import NegociaAcao from './pages/NegociaAcao';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="/acoes" component={ListaAcoes} />
+          <Route path="/negociacao" component={NegociaAcao} />
         </Switch>
       </BrowserRouter>
     </div>

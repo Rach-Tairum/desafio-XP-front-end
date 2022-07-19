@@ -21,7 +21,7 @@ function MinhasAcoes() {
           <tr>
             <th>Empresa</th>
             <th>Qtd</th>
-            <th>Valor</th>
+            <th>Valor(R$)</th>
           </tr>
         </thead>
         <tbody>

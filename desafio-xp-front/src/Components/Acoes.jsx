@@ -34,6 +34,7 @@ function Acoes() {
     <div>
       <label htmlFor="filtro">
         Filtre por nome da empresa:
+        {' '}
         <input type="text" onChange={handleChange} value={valueInput} placeholder="Digite o nome da empresa" id="filtro" />
       </label>
       <table>
@@ -41,7 +42,8 @@ function Acoes() {
           <tr>
             <th>Empresa</th>
             <th>Qtd</th>
-            <th>Valor</th>
+            <th>Valor(R$)</th>
+            <th>Negociação</th>
           </tr>
         </thead>
         <tbody>
@@ -52,6 +54,9 @@ function Acoes() {
               <td>{ nomeEmpresa }</td>
               <td>{ qtdAcoes }</td>
               <td>{ valorAcao }</td>
+              <td>
+                <button type="button">C</button>
+              </td>
             </tr>
           ))}
         </tbody>
