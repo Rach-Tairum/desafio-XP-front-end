@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { MyContext } from '../context/Provider';
 import getAllAcoes from '../utilis/getAllAcoes';
 
 function Acoes() {
-  const { acoes, setAcoes } = useContext(MyContext);
+  const { acoes, setAcoes, negocia } = useContext(MyContext);
   const [filterAcoes, setFilterAcoes] = useState([]);
   const [valueInput, setValueInput] = useState('');
+  const history = useHistory();
 
   useEffect(() => {
     const getInfos = async () => {
@@ -28,6 +30,11 @@ function Acoes() {
       });
       setFilterAcoes(arrFiltrado);
     }
+  };
+
+  const trabalhaAcoes = (id, negociacao) => {
+    negocia(id, negociacao);
+    history.push('/negociacao');
   };
 
   return (
@@ -55,7 +62,7 @@ function Acoes() {
               <td>{ qtdAcoes }</td>
               <td>{ valorAcao }</td>
               <td>
-                <button type="button">C</button>
+                <button type="button" onClick={() => trabalhaAcoes(id, 'compra')}>C</button>
               </td>
             </tr>
           ))}

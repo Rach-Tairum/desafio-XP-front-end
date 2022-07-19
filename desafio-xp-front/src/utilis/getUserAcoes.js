@@ -4,6 +4,7 @@ const filterInfos = (arrInfos, acoes) => {
   const arrfiltrado = arrInfos.map((info) => {
     const empresa = acoes.find((acao) => acao.id === info.acaoId);
     return {
+      id: empresa.id,
       empresa: empresa.nomeEmpresa,
       qtdComprada: info.qtdAcoesCompradas,
       valor: info.valorTotalCompra,

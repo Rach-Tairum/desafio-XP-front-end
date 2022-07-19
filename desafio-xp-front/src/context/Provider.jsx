@@ -7,6 +7,15 @@ function Provider({ children }) {
   const [token, setToken] = useState('');
   const [idSaldo, setIdSaldo] = useState({});
   const [acoes, setAcoes] = useState([]);
+  const [ObjNegocio, setObjNegocio] = useState({});
+
+  const negocia = (idEmpresa, negociacao) => {
+    const saveObj = {
+      idEmpresa,
+      tipoNegocio: negociacao,
+    };
+    setObjNegocio(saveObj);
+  };
 
   const contextValues = {
     token,
@@ -15,6 +24,8 @@ function Provider({ children }) {
     setIdSaldo,
     acoes,
     setAcoes,
+    ObjNegocio,
+    negocia,
   };
 
   return (
