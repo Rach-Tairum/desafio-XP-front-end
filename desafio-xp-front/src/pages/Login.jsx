@@ -6,6 +6,8 @@ import { useHistory } from 'react-router-dom';
 import Loading from '../Components/Loading';
 import { MyContext } from '../context/Provider';
 
+import { Container } from '../assets/styles/loginStyle';
+
 function Login() {
   const history = useHistory();
   const { setToken } = useContext(MyContext);
@@ -79,7 +81,7 @@ function Login() {
   return (
     carregando ? <Loading />
       : (
-        <div>
+        <Container>
           <h1>Login</h1>
           <label htmlFor="input">
             Email:
@@ -101,7 +103,7 @@ function Login() {
             Entrar
           </button>
           <p>{ errorMessage }</p>
-        </div>
+        </Container>
       )
   );
 }
