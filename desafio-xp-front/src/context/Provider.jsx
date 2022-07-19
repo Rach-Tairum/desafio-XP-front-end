@@ -1,18 +1,20 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-filename-extension */
 import React, { createContext, useState } from 'react';
 
 export const MyContext = createContext();
 
 function Provider({ children }) {
   const [token, setToken] = useState('');
-  const [saldo, setSaldo] = useState('');
+  const [idSaldo, setIdSaldo] = useState({});
+  const [acoes, setAcoes] = useState([]);
 
   const contextValues = {
     token,
     setToken,
-    saldo,
-    setSaldo,
+    idSaldo,
+    setIdSaldo,
+    acoes,
+    setAcoes,
   };
 
   return (

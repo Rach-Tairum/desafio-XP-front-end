@@ -5,18 +5,18 @@ import getUserInfos from '../utilis/getUserInfos';
 
 function Header() {
   const [name, setName] = useState('');
-  const { saldo, setSaldo } = useContext(MyContext);
+  const { idSaldo, setIdSaldo } = useContext(MyContext);
 
   useEffect(() => {
     const getInfos = async () => {
-      await getUserInfos(setName, setSaldo);
+      await getUserInfos(setName, setIdSaldo);
     };
     getInfos();
-  }, [setSaldo]);
+  }, [setIdSaldo]);
   return (
     <div>
       <h3>{ name }</h3>
-      <h3>{ saldo }</h3>
+      <h3>{ idSaldo.saldo }</h3>
     </div>
   );
 }
