@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from 'react';
 
 function ListaAcoes() {
   return (
     <div>
       <h1>Lista de ações</h1>
     </div>
-  )
+  );
 }
 
 export default ListaAcoes;

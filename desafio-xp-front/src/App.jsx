@@ -1,7 +1,7 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-
-import Login from "./pages/Login";
-import ListaAcoes from "./pages/ListaAcoes";
+/* eslint-disable react/react-in-jsx-scope */
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Login from './pages/Login';
+import ListaAcoes from './pages/ListaAcoes';
 
 function App() {
   return (
