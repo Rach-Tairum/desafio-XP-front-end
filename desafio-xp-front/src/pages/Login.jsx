@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { getToken } from "../actions";
 
 function Login() {
   const history = useHistory();
@@ -8,8 +9,15 @@ function Login() {
   const [passwordValue, setpasswordValue] = useState("");
   const [validEmail, setValidemail] = useState(false);
   const [passVisibility, setPassVisibility] = useState("password");
-  const [token, setToken] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    const email = localStorage.getItem('userXP')
+
+    if (email) {
+      setEmailValue(email)
+    }
+  }, [])
 
   const textError = (email) => {
     const re = /\S+@\S+\.\S+/; // referência: https://www.horadecodar.com.br/2020/09/13/como-validar-email-com-javascript/
@@ -32,16 +40,19 @@ function Login() {
   }
 
   const clickButton = async () => {
+    const { dispatch } = this.props;
     const objPost = {
       email: emailValue,
       password: passwordValue
     };
 
+    localStorage.setItem('userXP', emailValue)
+
     const url = 'https://back-api-desafio.herokuapp.com/login'
-    
+
     await axios.post(url, objPost).then((response) => {
-      setToken(response)
       setErrorMessage("")
+      dispatch(getToken(response.data.token))
       history.push('/acoes')
     }).catch(function (error) {
       setErrorMessage(error.response.data.message)
