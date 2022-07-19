@@ -1,1 +1,0 @@
-export const getToken = (token) => ({ type: 'NEW_TOKEN', token });

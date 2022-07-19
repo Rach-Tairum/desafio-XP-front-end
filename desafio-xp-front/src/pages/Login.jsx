@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { getToken } from "../actions";
+import Loading from '../Components/Loading';
+import { MyContext } from "../context/Provider";
 
 function Login() {
   const history = useHistory();
+  const { setToken } = useContext(MyContext);
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setpasswordValue] = useState("");
   const [validEmail, setValidemail] = useState(false);
   const [passVisibility, setPassVisibility] = useState("password");
   const [errorMessage, setErrorMessage] = useState("");
+  const [carregando, setCarregando] = useState(false)
 
   useEffect(() => {
     const email = localStorage.getItem('userXP')
@@ -40,7 +43,6 @@ function Login() {
   }
 
   const clickButton = async () => {
-    const { dispatch } = this.props;
     const objPost = {
       email: emailValue,
       password: passwordValue
@@ -48,18 +50,25 @@ function Login() {
 
     localStorage.setItem('userXP', emailValue)
 
+    setCarregando(true);
+
     const url = 'https://back-api-desafio.herokuapp.com/login'
 
     await axios.post(url, objPost).then((response) => {
       setErrorMessage("")
-      dispatch(getToken(response.data.token))
+      const token = response.data.token
+      setToken(token)
+      setCarregando(false)
       history.push('/acoes')
     }).catch(function (error) {
+      console.log(error);
       setErrorMessage(error.response.data.message)
+      setCarregando(false)
     });
   }
 
   return (
+    carregando ? <Loading /> : 
     <div>
       <h1>Login</h1>
       <label>
