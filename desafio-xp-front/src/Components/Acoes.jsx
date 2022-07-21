@@ -1,20 +1,26 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { MyContext } from '../context/Provider';
-import getAllAcoes from '../utilis/getAllAcoes';
+import validateToken from '../utilis/validateToken';
 
 function Acoes() {
-  const { acoes, setAcoes, negocia } = useContext(MyContext);
-  const [filterAcoes, setFilterAcoes] = useState([]);
+  const {
+    acoes,
+    filterAcoes,
+    setFilterAcoes,
+    getInfos,
+    negocia,
+    token,
+    getPersonInfos,
+  } = useContext(MyContext);
+
   const [valueInput, setValueInput] = useState('');
   const history = useHistory();
 
   useEffect(() => {
-    const getInfos = async () => {
-      await getAllAcoes(setAcoes, setFilterAcoes);
-    };
+    getPersonInfos();
     getInfos();
-  }, []);
+  }, [acoes]);
 
   const handleChange = ({ target }) => {
     const { value } = target;
@@ -32,9 +38,15 @@ function Acoes() {
     }
   };
 
-  const trabalhaAcoes = (id, negociacao) => {
+  const trabalhaAcoes = async (id, negociacao) => {
     negocia(id, negociacao);
-    history.push('/negociacao');
+    const message = await validateToken(token);
+
+    if (message !== 'OK') {
+      history.push('/unauthorized');
+    } else {
+      history.push('/negociacao');
+    }
   };
 
   return (

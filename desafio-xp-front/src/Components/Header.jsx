@@ -1,17 +1,12 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { MyContext } from '../context/Provider';
-import getUserInfos from '../utilis/getUserInfos';
 
 function Header() {
-  const [name, setName] = useState('');
-  const { idSaldo, setIdSaldo } = useContext(MyContext);
+  const { idSaldo, name, getPersonInfos } = useContext(MyContext);
 
   useEffect(() => {
-    const getInfos = async () => {
-      await getUserInfos(setName, setIdSaldo);
-    };
-    getInfos();
+    getPersonInfos();
   }, [idSaldo]);
   return (
     <div>

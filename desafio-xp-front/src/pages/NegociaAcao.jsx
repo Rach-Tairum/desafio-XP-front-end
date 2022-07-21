@@ -1,27 +1,11 @@
-import React, { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext } from 'react';
 import CompraAcoes from '../Components/CompraAcoes';
 import Header from '../Components/Header';
 import VendaAcoes from '../Components/VendaAcoes';
 import { MyContext } from '../context/Provider';
-import validateToken from '../utilis/validateToken';
 
 function NegociaAcao() {
-  const {
-    token, ObjNegocio,
-  } = useContext(MyContext);
-  const history = useHistory();
-
-  useEffect(() => {
-    const getInfos = async () => {
-      const message = await validateToken(token);
-
-      if (message !== 'OK') {
-        history.push('/unauthorized');
-      }
-    };
-    getInfos();
-  }, []);
+  const { ObjNegocio } = useContext(MyContext);
 
   return (
     <div>

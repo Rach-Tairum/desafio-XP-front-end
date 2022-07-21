@@ -1,27 +1,32 @@
 import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { MyContext } from '../context/Provider';
-import getUserAcoes from '../utilis/getUserAcoes';
+import validateToken from '../utilis/validateToken';
 
 function MinhasAcoes() {
   const {
-    acoes,
-    idSaldo,
     negocia,
     minhasAcoes,
-    setMinhasAcoes,
+    getMyInfos,
+    token,
+    getPersonInfos,
   } = useContext(MyContext);
   const history = useHistory();
 
   useEffect(() => {
-    const getInfos = async () => {
-      await getUserAcoes(setMinhasAcoes, acoes, idSaldo);
-    };
-    getInfos();
+    getPersonInfos();
+    getMyInfos();
   }, []);
 
-  const trabalhaAcoes = (id, negociacao) => {
+  const trabalhaAcoes = async (id, negociacao) => {
     negocia(id, negociacao);
+    const message = await validateToken(token);
+
+    if (message !== 'OK') {
+      history.push('/unauthorized');
+    } else {
+      history.push('/negociacao');
+    }
     history.push('/negociacao');
   };
 
