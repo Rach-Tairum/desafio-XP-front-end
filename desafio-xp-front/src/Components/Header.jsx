@@ -12,7 +12,7 @@ function Header() {
       await getUserInfos(setName, setIdSaldo);
     };
     getInfos();
-  }, [setIdSaldo]);
+  }, [idSaldo]);
   return (
     <div>
       <h3>{ name }</h3>

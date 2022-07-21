@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { MyContext } from '../context/Provider';
-import makeSell from '../utilis/makeSell';
+import makeBuy from '../utilis/makeBuy';
 
 function CompraAcoes() {
   const {
@@ -21,11 +21,11 @@ function CompraAcoes() {
   const showPriceAndQtd = ({ target }) => {
     const { value } = target;
 
-    if (value < 0) {
+    if (Number(value) < 0) {
       setInputValue(0);
       setRetornoText('Quantidade de Ações Inválida');
       setValorPago(0);
-    } else if (value > Number(dadosEmpresa.qtdAcoes)) {
+    } else if (Number(value) > Number(dadosEmpresa.qtdAcoes)) {
       setInputValue(Number(dadosEmpresa.qtdAcoes));
       setRetornoText('Quantidade de Ações Inválida');
       const total = Number(dadosEmpresa.valorAcao) * Number(dadosEmpresa.qtdAcoes);
@@ -35,8 +35,8 @@ function CompraAcoes() {
         setValorPago(total);
       }
     } else {
-      setInputValue(value);
-      const total = Number(dadosEmpresa.valorAcao) * value;
+      setInputValue(Number(value));
+      const total = Number(dadosEmpresa.valorAcao) * Number(value);
       if (total > idSaldo.saldo) {
         setRetornoText('Saldo insuficiente');
       } else {
@@ -50,7 +50,7 @@ function CompraAcoes() {
       qtdComprada: inputValue,
       valorCompra: valorPago,
     };
-    const sell = await makeSell(token, ObjNegocio.idEmpresa, objCompra);
+    const sell = await makeBuy(token, ObjNegocio.idEmpresa, objCompra);
 
     if (sell.includes('Token' || 'Expirada')) {
       history.push('/unauthorized');
@@ -73,7 +73,7 @@ function CompraAcoes() {
         </thead>
         <tbody>
           <tr>
-            <td>{ObjNegocio.idEmpresa}</td>
+            <td>{dadosEmpresa.nomeEmpresa}</td>
             <td>{ dadosEmpresa.qtdAcoes }</td>
             <td>{ dadosEmpresa.valorAcao }</td>
           </tr>

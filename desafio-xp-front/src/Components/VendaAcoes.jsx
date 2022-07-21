@@ -42,7 +42,7 @@ function VendaAcoes() {
 
   const clickSell = async () => {
     const objCompra = {
-      qtdVendida: inputValue,
+      qtdVendida: Number(inputValue),
       valorVenda: valorRecebido,
     };
     const sell = await makeSell(token, ObjNegocio.idEmpresa, objCompra);
@@ -68,7 +68,7 @@ function VendaAcoes() {
         </thead>
         <tbody>
           <tr>
-            <td>{ObjNegocio.idEmpresa}</td>
+            <td>{dadosEmpresa.nomeEmpresa}</td>
             <td>{ dadosUsuário.qtdComprada }</td>
             <td>{ dadosUsuário.valor }</td>
           </tr>
@@ -85,7 +85,7 @@ function VendaAcoes() {
       </p>
       <p>{valorRecebido}</p>
       <p>{retornoText}</p>
-      <button type="button" onClick={clickSell}>Comprar</button>
+      <button type="button" onClick={clickSell}>Vender</button>
       <button type="button" onClick={() => history.push('/acoes')}>Voltar</button>
     </div>
   );
