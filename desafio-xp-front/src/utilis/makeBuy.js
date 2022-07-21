@@ -7,7 +7,7 @@ const makeBuy = async (token, idEmpresa, objBody) => {
     headers: {
       authorization: token,
     },
-  }).then((response) => response.data).catch((error) => error);
+  }).then((response) => response.data).catch((error) => error.response.data.message);
 
   return result;
 };
