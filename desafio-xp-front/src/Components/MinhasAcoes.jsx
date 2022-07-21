@@ -1,11 +1,16 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { MyContext } from '../context/Provider';
 import getUserAcoes from '../utilis/getUserAcoes';
 
 function MinhasAcoes() {
-  const [minhasAcoes, setMinhasAcoes] = useState([]);
-  const { acoes, idSaldo, negocia } = useContext(MyContext);
+  const {
+    acoes,
+    idSaldo,
+    negocia,
+    minhasAcoes,
+    setMinhasAcoes,
+  } = useContext(MyContext);
   const history = useHistory();
 
   useEffect(() => {

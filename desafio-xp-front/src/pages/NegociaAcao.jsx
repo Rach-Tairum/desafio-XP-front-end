@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import CompraAcoes from '../Components/CompraAcoes';
 import Header from '../Components/Header';
+import VendaAcoes from '../Components/VendaAcoes';
 import { MyContext } from '../context/Provider';
 import validateToken from '../utilis/validateToken';
 
@@ -26,7 +27,7 @@ function NegociaAcao() {
     <div>
       <Header />
       <h2>Negociação de ações</h2>
-      {ObjNegocio.tipoNegocio === 'compra' ? <CompraAcoes /> : }
+      {ObjNegocio.tipoNegocio === 'compra' ? <CompraAcoes /> : <VendaAcoes />}
     </div>
   );
 }

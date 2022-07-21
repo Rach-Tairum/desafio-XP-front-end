@@ -8,6 +8,7 @@ function Provider({ children }) {
   const [token, setToken] = useState('');
   const [idSaldo, setIdSaldo] = useState({});
   const [acoes, setAcoes] = useState([]);
+  const [minhasAcoes, setMinhasAcoes] = useState([]);
   const [ObjNegocio, setObjNegocio] = useState({});
 
   const negocia = (idEmpresa, negociacao) => {
@@ -25,6 +26,8 @@ function Provider({ children }) {
     setIdSaldo,
     acoes,
     setAcoes,
+    minhasAcoes,
+    setMinhasAcoes,
     ObjNegocio,
     negocia,
   };

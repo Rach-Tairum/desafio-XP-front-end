@@ -3,17 +3,22 @@ import { useHistory } from 'react-router-dom';
 import { MyContext } from '../context/Provider';
 import makeSell from '../utilis/makeSell';
 
-function CompraAcoes() {
-  const { ObjNegocio, acoes, token } = useContext(MyContext);
+function VendaAcoes() {
+  const {
+    ObjNegocio, acoes, token, idSaldo, setIdSaldo, minhasAcoes,
+  } = useContext(MyContext);
   const [dadosEmpresa, setDadosEmpresa] = useState({});
+  const [dadosUsuário, setDadosUsuário] = useState({});
   const [inputValue, setInputValue] = useState(0);
-  const [valorPago, setValorPago] = useState(0);
+  const [valorRecebido, setValorRecebido] = useState(0);
   const [retornoText, setRetornoText] = useState('');
   const history = useHistory();
 
   useEffect(() => {
     const empresa = acoes.find((item) => item.id === ObjNegocio.idEmpresa);
+    const user = minhasAcoes.find((item) => item.id === ObjNegocio.idEmpresa);
     setDadosEmpresa(empresa);
+    setDadosUsuário(user);
   }, []);
 
   const showPriceAndQtd = ({ target }) => {
@@ -21,26 +26,34 @@ function CompraAcoes() {
 
     if (value < 0) {
       setInputValue(0);
-      setValorPago(0);
-    } else if (value > Number(dadosEmpresa.qtdAcoes)) {
-      setInputValue(Number(dadosEmpresa.qtdAcoes));
-      const total = Number(dadosEmpresa.valorAcao) * Number(dadosEmpresa.qtdAcoes);
-      setValorPago(total);
+      setRetornoText('Quantidade de Ações Inválida');
+      setValorRecebido(0);
+    } else if (value > Number(dadosUsuário.qtdComprada)) {
+      setInputValue(Number(dadosUsuário.qtdComprada));
+      setRetornoText('Quantidade de Ações Inválida');
+      const total = Number(dadosEmpresa.valorAcao) * Number(dadosUsuário.qtdComprada);
+      setValorRecebido(total);
     } else {
       setInputValue(value);
       const total = Number(dadosEmpresa.valorAcao) * value;
-      setValorPago(total);
+      setValorRecebido(total);
     }
   };
 
   const clickSell = async () => {
     const objCompra = {
-      qtdComprada: inputValue,
-      valorCompra: valorPago,
+      qtdVendida: inputValue,
+      valorVenda: valorRecebido,
     };
     const sell = await makeSell(token, ObjNegocio.idEmpresa, objCompra);
 
-    setRetornoText(sell);
+    if (sell.includes('Token' || 'Expirada')) {
+      history.push('/unauthorized');
+    } else {
+      setRetornoText(sell);
+      const total = idSaldo.saldo + valorRecebido;
+      setIdSaldo(total);
+    }
   };
 
   return (
@@ -49,33 +62,33 @@ function CompraAcoes() {
         <thead>
           <tr>
             <th>Empresa</th>
-            <th>Qtd</th>
-            <th>Valor(R$)</th>
+            <th>Qtd minhas ações</th>
+            <th>Valor total das minhas ações(R$)</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>{ObjNegocio.idEmpresa}</td>
-            <td>{ dadosEmpresa.qtdAcoes }</td>
-            <td>{ dadosEmpresa.valorAcao }</td>
+            <td>{ dadosUsuário.qtdComprada }</td>
+            <td>{ dadosUsuário.valor }</td>
           </tr>
         </tbody>
       </table>
       <label htmlFor="qtd">
         Qtd de ações
-        <input type="number" value={inputValue} id="qtd" max={dadosEmpresa.qtdAcoes} onChange={showPriceAndQtd} />
+        <input type="number" value={inputValue} id="qtd" max={dadosUsuário.qtdComprada} onChange={showPriceAndQtd} />
       </label>
       <p>
         Max:
         {' '}
-        {dadosEmpresa.qtdAcoes}
+        {dadosUsuário.qtdComprada}
       </p>
-      <p>{valorPago}</p>
+      <p>{valorRecebido}</p>
+      <p>{retornoText}</p>
       <button type="button" onClick={clickSell}>Comprar</button>
       <button type="button" onClick={() => history.push('/acoes')}>Voltar</button>
-      <p>{retornoText}</p>
     </div>
   );
 }
 
-export default CompraAcoes;
+export default VendaAcoes;
