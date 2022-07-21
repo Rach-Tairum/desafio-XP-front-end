@@ -11,6 +11,7 @@ function CompraAcoes() {
   const [inputValue, setInputValue] = useState(0);
   const [valorPago, setValorPago] = useState(0);
   const [retornoText, setRetornoText] = useState('');
+  const [ableClick, setAbleClick] = useState(true);
   const history = useHistory();
 
   useEffect(() => {
@@ -25,22 +26,30 @@ function CompraAcoes() {
       setInputValue(0);
       setRetornoText('Quantidade de Ações Inválida');
       setValorPago(0);
+      setAbleClick(true);
     } else if (Number(value) > Number(dadosEmpresa.qtdAcoes)) {
       setInputValue(Number(dadosEmpresa.qtdAcoes));
-      setRetornoText('Quantidade de Ações Inválida');
+      setRetornoText('Quantidade de Ações Máxima Ultrapassada');
+      setAbleClick(true);
       const total = Number(dadosEmpresa.valorAcao) * Number(dadosEmpresa.qtdAcoes);
       if (total > idSaldo.saldo) {
         setRetornoText('Saldo insuficiente');
+        setAbleClick(true);
       } else {
         setValorPago(total);
+        setAbleClick(false);
       }
     } else {
       setInputValue(Number(value));
+      setRetornoText('');
       const total = Number(dadosEmpresa.valorAcao) * Number(value);
       if (total > idSaldo.saldo) {
         setRetornoText('Saldo insuficiente');
+        setAbleClick(true);
       } else {
+        setRetornoText('');
         setValorPago(total);
+        setAbleClick(false);
       }
     }
   };
@@ -88,9 +97,9 @@ function CompraAcoes() {
         {' '}
         {dadosEmpresa.qtdAcoes}
       </p>
-      <p>{valorPago}</p>
+      <p>{valorPago.toFixed(2)}</p>
       <p>{retornoText}</p>
-      <button type="button" onClick={clickSell}>Comprar</button>
+      <button type="button" disabled={ableClick} onClick={clickSell}>Comprar</button>
       <button type="button" onClick={() => history.push('/acoes')}>Voltar</button>
     </div>
   );
