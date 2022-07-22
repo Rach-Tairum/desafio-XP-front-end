@@ -6,7 +6,7 @@ export const LayoutAcoes = styled.div`
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 80vh;
+  height: 85vh;
 `;
 
 export const TituloAcao = styled.h1`
@@ -15,7 +15,7 @@ export const TituloAcao = styled.h1`
   height: 10vh;
   text-align: center;
   font-size: 3vw;
-  margin-top: 250px;
+  margin-top: 260px;
 `;
 
 export const Options = styled.div`
