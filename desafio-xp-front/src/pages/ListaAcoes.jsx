@@ -4,6 +4,8 @@ import Acoes from '../Components/Acoes';
 import Header from '../Components/Header';
 import MinhasAcoes from '../Components/MinhasAcoes';
 
+import * as A from '../assets/styles/listaAcoesStyle';
+
 function ListaAcoes() {
   const [visibility, setVisibility] = useState('all');
   const history = useHistory();
@@ -11,13 +13,15 @@ function ListaAcoes() {
   return (
     <div>
       <Header />
-      <h1>Ações</h1>
-      <div>
-        <button type="button" onClick={() => setVisibility('mine')}>Minhas Ações</button>
-        <button type="button" onClick={() => setVisibility('all')}>Lista de ações</button>
-      </div>
-      {visibility === 'all' ? <Acoes /> : <MinhasAcoes />}
-      <button type="button" onClick={() => history.push('/carteira')}>Carteira Digital</button>
+      <A.LayoutAcoes>
+        <A.TituloAcao>Ações</A.TituloAcao>
+        <A.Options>
+          <A.ButtonOption type="button" onClick={() => setVisibility('mine')}>Minhas Ações</A.ButtonOption>
+          <A.ButtonOption type="button" onClick={() => setVisibility('all')}>Lista de ações</A.ButtonOption>
+        </A.Options>
+        {visibility === 'all' ? <Acoes /> : <MinhasAcoes />}
+        <A.CarteiraButton type="button" onClick={() => history.push('/carteira')}>Carteira Digital</A.CarteiraButton>
+      </A.LayoutAcoes>
     </div>
   );
 }
