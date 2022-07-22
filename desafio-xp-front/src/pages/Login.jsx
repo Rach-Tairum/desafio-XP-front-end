@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import Loading from '../Components/Loading';
 import { MyContext } from '../context/Provider';
 
-import { Container } from '../assets/styles/loginStyle';
+import * as R from '../assets/styles/loginStyle';
 
 function Login() {
   const history = useHistory();
@@ -81,29 +81,38 @@ function Login() {
   return (
     carregando ? <Loading />
       : (
-        <Container>
-          <h1>Login</h1>
-          <label htmlFor="input">
-            Email:
-            <input type="email" placeholder="Digite seu e-mail" value={emailValue} id="input" onChange={handleInput} />
-          </label>
-          {validEmail && <p>Email Inválido</p> }
-          <label htmlFor="pass">
-            Senha:
-            <input type={passVisibility} placeholder="Digite sua senha" value={passwordValue} id="pass" onChange={handleInput} />
-            {' '}
-            <span className="material-icons" onClick={clickVisibility}> visibility </span>
-          </label>
-          {' '}
-          <button
-            type="button"
-            disabled={!(!validEmail && passwordValue.length > 1)}
-            onClick={clickButton}
-          >
-            Entrar
-          </button>
-          <p>{ errorMessage }</p>
-        </Container>
+        <R.Container>
+          <R.Box>
+            <R.Title>Login</R.Title>
+            <R.Formulário>
+              <R.Rotulo htmlFor="input">
+                Email:
+                {' '}
+                <R.Input type="email" placeholder="Digite seu e-mail" value={emailValue} id="input" onChange={handleInput} />
+              </R.Rotulo>
+              {validEmail && <R.ErroMessage>Email Inválido</R.ErroMessage> }
+              <R.Senha>
+                <R.Rotulo htmlFor="pass">
+                  Senha:
+                  {' '}
+                  <R.Input type={passVisibility} placeholder="Digite sua senha" value={passwordValue} id="pass" onChange={handleInput} />
+                </R.Rotulo>
+                <R.Icon className="material-icons" onClick={clickVisibility}> visibility </R.Icon>
+              </R.Senha>
+
+              {' '}
+              <R.Entrar
+                type="button"
+                disabled={!(!validEmail && passwordValue.length > 1)}
+                onClick={clickButton}
+              >
+                Entrar
+              </R.Entrar>
+              <R.ErroMessage>{ errorMessage }</R.ErroMessage>
+            </R.Formulário>
+          </R.Box>
+
+        </R.Container>
       )
   );
 }
