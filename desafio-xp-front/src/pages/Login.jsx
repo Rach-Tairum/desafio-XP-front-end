@@ -20,9 +20,10 @@ function Login() {
 
   useEffect(() => {
     const email = localStorage.getItem('userXP');
+    const objInfos = JSON.parse(email);
 
     if (email) {
-      setEmailValue(email);
+      setEmailValue(objInfos.email);
     }
   }, []);
 
@@ -60,7 +61,14 @@ function Login() {
       password: passwordValue,
     };
 
-    localStorage.setItem('userXP', emailValue);
+    const objLocal = {
+      email: emailValue,
+      time: Date(),
+    };
+
+    const stringObj = JSON.stringify(objLocal);
+
+    localStorage.setItem('userXP', stringObj);
 
     setCarregando(true);
 
