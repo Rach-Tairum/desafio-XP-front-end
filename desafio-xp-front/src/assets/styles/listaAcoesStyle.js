@@ -6,7 +6,7 @@ export const LayoutAcoes = styled.div`
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 35vh;
+  height: 80vh;
 `;
 
 export const TituloAcao = styled.h1`
@@ -23,7 +23,7 @@ export const Options = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 export const ButtonOption = styled.button`
@@ -41,7 +41,7 @@ export const ButtonOption = styled.button`
 export const CarteiraButton = styled.button`
   width: 12vw;
   height: 30vh;
-  margin: 20px;
+  margin: 5px;
   margin-top: 50px;
   font-size: 1.2vw;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;

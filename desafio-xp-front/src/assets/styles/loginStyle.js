@@ -51,7 +51,7 @@ export const Input = styled.input`
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@200&display=swap');
   font-family: Prompt ;
   font-weight: 600;
-  padding: 10px;
+  padding: 10px 20px;
   border-radius: 10px;
   font-size: 0.9vw;
   margin-right: 5px;

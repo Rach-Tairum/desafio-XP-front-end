@@ -2,6 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { MyContext } from '../context/Provider';
 import validateToken from '../utilis/validateToken';
+import Loading from './Loading';
+
+import * as R from '../assets/styles/loginStyle';
+import * as L from '../assets/styles/acoesStyle';
 
 function Acoes() {
   const {
@@ -11,16 +15,14 @@ function Acoes() {
     getInfos,
     negocia,
     token,
-    getPersonInfos,
   } = useContext(MyContext);
 
   const [valueInput, setValueInput] = useState('');
   const history = useHistory();
 
   useEffect(() => {
-    getPersonInfos();
     getInfos();
-  }, [acoes]);
+  }, []);
 
   const handleChange = ({ target }) => {
     const { value } = target;
@@ -50,37 +52,40 @@ function Acoes() {
   };
 
   return (
-    <div>
-      <label htmlFor="filtro">
-        Filtre por nome da empresa:
-        {' '}
-        <input type="text" onChange={handleChange} value={valueInput} placeholder="Digite o nome da empresa" id="filtro" />
-      </label>
-      <table>
-        <thead>
-          <tr>
-            <th>Empresa</th>
-            <th>Qtd</th>
-            <th>Valor(R$)</th>
-            <th>Negociação</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filterAcoes.map(({
-            id, nomeEmpresa, qtdAcoes, valorAcao,
-          }) => (
-            <tr key={id}>
-              <td>{ nomeEmpresa }</td>
-              <td>{ qtdAcoes }</td>
-              <td>{ valorAcao }</td>
-              <td>
-                <button type="button" onClick={() => trabalhaAcoes(id, 'compra')}>C</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    filterAcoes.length === 0 ? <Loading />
+      : (
+        <R.Container>
+          <L.RotuloBusca htmlFor="filtro">
+            Filtre por nome da empresa:
+            {' '}
+            <L.InputBusca type="text" onChange={handleChange} value={valueInput} placeholder="Digite o nome da empresa" id="filtro" />
+          </L.RotuloBusca>
+          <table>
+            <thead>
+              <tr>
+                <L.TabelaTitulos>Empresa</L.TabelaTitulos>
+                <L.TabelaTitulos>Qtd</L.TabelaTitulos>
+                <L.TabelaTitulos>Valor(R$)</L.TabelaTitulos>
+                <L.ColunaEspecial>Negociação</L.ColunaEspecial>
+              </tr>
+            </thead>
+            <tbody>
+              {filterAcoes.map(({
+                id, nomeEmpresa, qtdAcoes, valorAcao,
+              }) => (
+                <tr key={id}>
+                  <L.TabelaCorpo>{ nomeEmpresa }</L.TabelaCorpo>
+                  <L.TabelaCorpo>{ qtdAcoes }</L.TabelaCorpo>
+                  <L.TabelaCorpo>{ valorAcao }</L.TabelaCorpo>
+                  <L.TabelaCorpo>
+                    <L.Compra type="button" onClick={() => trabalhaAcoes(id, 'compra')}>C</L.Compra>
+                  </L.TabelaCorpo>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </R.Container>
+      )
   );
 }
 
