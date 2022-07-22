@@ -108,7 +108,7 @@ function Login() {
               >
                 Entrar
               </R.Entrar>
-              <R.ErroMessage>{ errorMessage }</R.ErroMessage>
+              <R.ErroMessage data-testid="error">{ errorMessage }</R.ErroMessage>
             </R.Formulário>
           </R.Box>
 
