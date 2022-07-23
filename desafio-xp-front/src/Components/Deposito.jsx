@@ -21,6 +21,7 @@ function Deposito() { // coloca dinheiro na própria conta da pessoa usuária
 
     if (id === 'valorDeposito') {
       setValorDeposito(value);
+      setAbleClick(true);
     } else {
       setValorConta(value);
       if (value.includes('.') && value.includes('-') && value.length <= 20) { // Referencia de numero de digitos: https://audesp.tce.sp.gov.br/faq/entry/231/#:~:text=Conforme%20XSDs%20publicados%2C%20assumimos%20que,caracter%2C%20letra%20ou%20d%C3%ADgito).
@@ -28,6 +29,7 @@ function Deposito() { // coloca dinheiro na própria conta da pessoa usuária
         setErrorMessage('');
       } else {
         setErrorMessage('A conta deve conter até 20 digitos separados por . e -');
+        setAbleClick(true);
       }
     }
   };
@@ -45,6 +47,7 @@ function Deposito() { // coloca dinheiro na própria conta da pessoa usuária
       setErrorMessage(text);
       const total = idSaldo.saldo + Number(valorDeposito);
       setIdSaldo(total);
+      setAbleClick(true);
     }
   };
 

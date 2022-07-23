@@ -23,9 +23,11 @@ function Saque() {
       if (idSaldo.saldo < value) {
         setValorSaque(value);
         setErrorMessage('Saldo Insuficiente');
+        setAbleClick(true);
       } else {
         setValorSaque(value);
         setErrorMessage('');
+        setAbleClick(true);
       }
     } else {
       setValorConta(value);
@@ -34,6 +36,7 @@ function Saque() {
         setErrorMessage('');
       } else {
         setErrorMessage('A conta deve conter até 20 digitos separados por . e -');
+        setAbleClick(true);
       }
     }
   };
@@ -51,6 +54,7 @@ function Saque() {
       setErrorMessage(text);
       const total = idSaldo.saldo - Number(valorSaque);
       setIdSaldo(total);
+      setAbleClick(true);
     }
   };
 
