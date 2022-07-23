@@ -1,15 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import {
+  ContainerPage, TitlePage, SubtitlePage, ButtonVolta,
+} from '../assets/styles/unauthorizedStyle';
+
 function Unauthorized() {
   return (
-    <div>
-      <h1>Seção expirada</h1>
-      <h4>Favor fazer novo login e conseguir uma nova autenticação</h4>
+    <ContainerPage>
+      <TitlePage>Seção expirada</TitlePage>
+      <SubtitlePage>Favor fazer novo login e conseguir uma nova autenticação</SubtitlePage>
       <Link to="/">
-        <button type="button"> Voltar ao Login </button>
+        <ButtonVolta type="button"> Voltar ao Login </ButtonVolta>
       </Link>
-    </div>
+    </ContainerPage>
   );
 }
 

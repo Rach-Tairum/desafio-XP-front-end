@@ -26,7 +26,7 @@ export const Senha = styled.div`
 `;
 
 export const Box = styled.div`
-  background-color: #FFFFAD;
+  background-color: yellow;
   padding: 100px 50px;
   border-radius: 50px;
   border: 2px solid black;

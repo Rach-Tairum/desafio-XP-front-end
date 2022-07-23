@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Cabecalho = styled.div`
-  background-color: #FFFFAD;
+  background-color: yellow;
   display: flex;
   flex-direction: row;
   align-items: center;
