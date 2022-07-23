@@ -3,6 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { MyContext } from '../context/Provider';
 import makeSell from '../utilis/makeSell';
 
+import { CarteiraButtons } from '../assets/styles/carteiraStyle';
+import { ErroMessage } from '../assets/styles/loginStyle';
+import * as N from '../assets/styles/negociacaoStyle';
+import * as L from '../assets/styles/acoesStyle';
+
 function VendaAcoes() {
   const {
     ObjNegocio, acoes, token, idSaldo, setIdSaldo, minhasAcoes,
@@ -25,27 +30,28 @@ function VendaAcoes() {
   const showPriceAndQtd = ({ target }) => {
     const { value } = target;
 
-    if (value < 0 || value === 0) {
+    if (Number(value) < 0 || Number(value) === 0) {
       setInputValue(0);
       setRetornoText('Quantidade de Ações Inválida');
       setValorRecebido(0);
       setAbleClick(true);
-    } else if (value > Number(dadosUsuário.qtdComprada)) {
+    } else if (Number(value) > Number(dadosUsuário.qtdComprada)) {
       setInputValue(Number(dadosUsuário.qtdComprada));
       setRetornoText('Quantidade de Ações Máxima Ultrapassada');
       setAbleClick(true);
       const total = Number(dadosEmpresa.valorAcao) * Number(dadosUsuário.qtdComprada);
       setValorRecebido(total);
     } else {
-      setInputValue(value);
+      setInputValue(Number(value));
       setRetornoText('');
-      const total = Number(dadosEmpresa.valorAcao) * value;
+      const total = Number(dadosEmpresa.valorAcao) * Number(value);
       setValorRecebido(total);
       setAbleClick(false);
     }
   };
 
   const clickSell = async () => {
+    setRetornoText('Aguarde...');
     const objCompra = {
       qtdVendida: Number(inputValue),
       valorVenda: valorRecebido,
@@ -58,40 +64,53 @@ function VendaAcoes() {
       setRetornoText(sell);
       const total = idSaldo.saldo + valorRecebido;
       setIdSaldo(total);
+      setAbleClick(true);
     }
   };
 
   return (
     <div>
-      <table>
+      <N.TabelaVendas>
         <thead>
           <tr>
-            <th>Empresa</th>
-            <th>Qtd minhas ações</th>
-            <th>Valor total das minhas ações(R$)</th>
+            <L.TabelaTitulos>Empresa</L.TabelaTitulos>
+            <L.TabelaTitulos>Qtd minhas ações</L.TabelaTitulos>
+            <L.ColunaEspecial>Valor total das minhas ações(R$)</L.ColunaEspecial>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>{dadosEmpresa.nomeEmpresa}</td>
-            <td>{ dadosUsuário.qtdComprada }</td>
-            <td>{ dadosUsuário.valor }</td>
+            <L.TabelaCorpo>{dadosEmpresa.nomeEmpresa}</L.TabelaCorpo>
+            <L.TabelaCorpo>{ dadosUsuário.qtdComprada }</L.TabelaCorpo>
+            <L.TabelaCorpo>{ dadosUsuário.valor }</L.TabelaCorpo>
           </tr>
         </tbody>
-      </table>
-      <label htmlFor="qtd">
-        Qtd de ações
-        <input type="number" value={inputValue} id="qtd" max={dadosUsuário.qtdComprada} onChange={showPriceAndQtd} />
-      </label>
-      <p>
-        Max:
-        {' '}
-        {dadosUsuário.qtdComprada}
-      </p>
-      <p>{valorRecebido.toFixed(2)}</p>
-      <p>{retornoText}</p>
-      <button type="button" disabled={ableClick} onClick={clickSell}>Vender</button>
-      <button type="button" onClick={() => history.push('/acoes')}>Voltar</button>
+      </N.TabelaVendas>
+      <N.ContainerNegociacao>
+        <L.RotuloBusca htmlFor="qtd">
+          Qtd de ações:
+          {' '}
+          <L.InputBusca type="number" value={inputValue} id="qtd" max={dadosUsuário.qtdComprada} onChange={showPriceAndQtd} />
+        </L.RotuloBusca>
+        <N.TextInfos>
+          Max:
+          {' '}
+          {dadosUsuário.qtdComprada}
+        </N.TextInfos>
+        <N.TextInfos>
+          {' '}
+          Valor a ser pago:
+          {' '}
+          R$
+          {' '}
+          {valorRecebido.toFixed(2)}
+        </N.TextInfos>
+      </N.ContainerNegociacao>
+      <ErroMessage>{retornoText}</ErroMessage>
+      <N.Tabela>
+        <CarteiraButtons type="button" disabled={ableClick} onClick={clickSell}>Vender</CarteiraButtons>
+        <CarteiraButtons type="button" onClick={() => history.push('/acoes')}>Voltar</CarteiraButtons>
+      </N.Tabela>
     </div>
   );
 }

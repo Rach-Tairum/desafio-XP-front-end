@@ -4,14 +4,19 @@ import Header from '../Components/Header';
 import VendaAcoes from '../Components/VendaAcoes';
 import { MyContext } from '../context/Provider';
 
+import { ContainerCarteira } from '../assets/styles/carteiraStyle';
+import { TituloNegociacao } from '../assets/styles/negociacaoStyle';
+
 function NegociaAcao() {
   const { ObjNegocio } = useContext(MyContext);
 
   return (
     <div>
       <Header />
-      <h2>Negociação de ações</h2>
-      {ObjNegocio.tipoNegocio === 'compra' ? <CompraAcoes /> : <VendaAcoes />}
+      <ContainerCarteira>
+        <TituloNegociacao>Negociação de Ações</TituloNegociacao>
+        {ObjNegocio.tipoNegocio === 'compra' ? <CompraAcoes /> : <VendaAcoes />}
+      </ContainerCarteira>
     </div>
   );
 }

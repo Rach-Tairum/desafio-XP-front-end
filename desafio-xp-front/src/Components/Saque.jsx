@@ -42,6 +42,7 @@ function Saque() {
   };
 
   const handleSaque = async () => {
+    setErrorMessage('Aguarde...');
     const objSaque = {
       valorSaque: Number(valorSaque),
     };

@@ -35,6 +35,7 @@ function Deposito() { // coloca dinheiro na própria conta da pessoa usuária
   };
 
   const handleDeposito = async () => {
+    setErrorMessage('Aguarde...');
     const objDeposito = {
       valorDeposito: Number(valorDeposito),
     };
