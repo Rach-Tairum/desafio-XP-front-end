@@ -3,6 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { MyContext } from '../context/Provider';
 import makeDeposit from '../utilis/makedeposit';
 
+import * as L from '../assets/styles/acoesStyle';
+import { InputsCarteira, CarteiraButtons } from '../assets/styles/carteiraStyle';
+import { ErroMessage } from '../assets/styles/loginStyle';
+import { Options } from '../assets/styles/listaAcoesStyle';
+
 function Deposito() { // coloca dinheiro na própria conta da pessoa usuária
   const [valorDeposito, setValorDeposito] = useState(0);
   const [valorConta, setValorConta] = useState('');
@@ -45,19 +50,24 @@ function Deposito() { // coloca dinheiro na própria conta da pessoa usuária
 
   return (
     <div>
-      <label htmlFor="valorDeposito">
-        Valor do Depósito:
-        {' '}
-        <input type="number" step=".01" id="valorDeposito" placeholder="Digite o valor depositado" value={valorDeposito} onChange={valuesInputs} />
-      </label>
-      <label htmlFor="contaDeposito">
-        Conta de origem do depósito:
-        {' '}
-        <input type="text" id="contaDeposito" placeholder="Digite a conta de onde vem o deposito" value={valorConta} onChange={valuesInputs} />
-      </label>
-      <p>{errorMessage}</p>
-      <button type="button" disabled={ableClick} onClick={handleDeposito}>Depositar</button>
-      <button type="button" onClick={() => history.push('/acoes')}>Voltar</button>
+      <InputsCarteira>
+        <L.RotuloBusca htmlFor="valorDeposito">
+          Valor do Depósito:
+          {' '}
+          <L.InputBusca type="number" step=".01" id="valorDeposito" placeholder="Digite o valor depositado" value={valorDeposito} onChange={valuesInputs} />
+        </L.RotuloBusca>
+        <L.RotuloBusca htmlFor="contaDeposito">
+          Conta de origem do depósito:
+          {' '}
+          <L.InputBusca type="text" id="contaDeposito" placeholder="Digite a conta de onde vem o deposito" value={valorConta} onChange={valuesInputs} />
+        </L.RotuloBusca>
+      </InputsCarteira>
+
+      <ErroMessage>{errorMessage}</ErroMessage>
+      <Options>
+        <CarteiraButtons type="button" disabled={ableClick} onClick={handleDeposito}>Depositar</CarteiraButtons>
+        <CarteiraButtons type="button" onClick={() => history.push('/acoes')}>Voltar</CarteiraButtons>
+      </Options>
     </div>
   );
 }

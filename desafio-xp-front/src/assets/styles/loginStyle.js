@@ -84,4 +84,5 @@ export const ErroMessage = styled.p`
   color: #EB0000;
   font-weight: 550;
   margin-top: 10px;
+  text-align: center;
 `;

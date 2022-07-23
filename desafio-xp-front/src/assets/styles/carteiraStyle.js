@@ -3,10 +3,10 @@ import styled from 'styled-components';
 export const TituloCarteira = styled.h2`
 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 width: 22vw;
-height: 10vh;
+height: 100vh;
 text-align: center;
 font-size: 3vw;
-margin-top: 260px;
+margin-top: 400px;
 `;
 
 export const RotuloValor = styled.label`
@@ -33,4 +33,25 @@ export const ContainerCarteira = styled.div`
   justify-content: center;
   width: 100vw;
   height: 15vh;
+`;
+
+export const InputsCarteira = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const CarteiraButtons = styled.button`
+  width: 12vw;
+  height: 6vh;
+  margin: 8px;
+  margin-top: 50px;
+  margin-left: 55px;
+  font-size: 1.2vw;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  border-radius: 30px;
+  background-color: black;
+  color: rgb(255, 255, 255);
+  padding: 10px;
 `;

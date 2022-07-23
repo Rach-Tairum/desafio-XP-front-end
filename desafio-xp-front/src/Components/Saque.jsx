@@ -3,6 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { MyContext } from '../context/Provider';
 import makeWithdraw from '../utilis/makeWithdraw';
 
+import * as L from '../assets/styles/acoesStyle';
+import { InputsCarteira, CarteiraButtons } from '../assets/styles/carteiraStyle';
+import { ErroMessage } from '../assets/styles/loginStyle';
+import { Options } from '../assets/styles/listaAcoesStyle';
+
 function Saque() {
   const [valorSaque, setValorSaque] = useState(0);
   const [valorConta, setValorConta] = useState('');
@@ -51,19 +56,25 @@ function Saque() {
 
   return (
     <div>
-      <label htmlFor="valorSaque">
-        Valor do Saque:
-        {' '}
-        <input type="number" step=".01" id="valorSaque" placeholder="Digite o valor sacado" value={valorSaque} onChange={valuesInputs} />
-      </label>
-      <label htmlFor="contaSaque">
-        Conta de destino do saque:
-        {' '}
-        <input type="text" id="contaSaque" placeholder="Digite a conta para onde vai o saque" value={valorConta} onChange={valuesInputs} />
-      </label>
-      <p>{errorMessage}</p>
-      <button type="button" disabled={ableClick} onClick={handleSaque}>Sacar</button>
-      <button type="button" onClick={() => history.push('/acoes')}>Voltar</button>
+      <InputsCarteira>
+        <L.RotuloBusca htmlFor="valorSaque">
+          Valor do Saque:
+          {' '}
+          <L.InputBusca type="number" step=".01" id="valorSaque" placeholder="Digite o valor sacado" value={valorSaque} onChange={valuesInputs} />
+        </L.RotuloBusca>
+        <L.RotuloBusca htmlFor="contaSaque">
+          Conta de destino do saque:
+          {' '}
+          <L.InputBusca type="text" id="contaSaque" placeholder="Digite a conta para onde vai o saque" value={valorConta} onChange={valuesInputs} />
+        </L.RotuloBusca>
+      </InputsCarteira>
+
+      <ErroMessage>{errorMessage}</ErroMessage>
+      <Options>
+        <CarteiraButtons type="button" disabled={ableClick} onClick={handleSaque}>Sacar</CarteiraButtons>
+        <CarteiraButtons type="button" onClick={() => history.push('/acoes')}>Voltar</CarteiraButtons>
+      </Options>
+
     </div>
   );
 }
