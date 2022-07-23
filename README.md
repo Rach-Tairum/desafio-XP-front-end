@@ -45,6 +45,25 @@
 - Para rodar localmente o projeto utilize o comando `npm start`
   - O projeto será aberto no link http://localhost:3000 caso essa porta já esteja em uso uma outra será sugerida pelo React para que possa visualizar sem problemas
   
+### Possíveis usuários para teste:
+(nenhum destes usuários são reais, foram criados somente para demonstração das funcionalidades da aplicação)
+
+- João:
+  - email: `joão.xp@teste.com`
+  - senha: `euEstiveAqui`
+
+- Maria:
+  - email: `maria.xp@teste.com`
+  - senha: `euEstiveAquiTambem`
+
+- Guilherme:
+  - email: `guilherme.xp@teste.com`
+  - senha: `euNaoEstiveAqui`
+  
+- Marcia:
+  - email: `marcia.xp@teste.com`
+  - senha: `professoraPort`
+  
 ### Testes:
 
 - Rode o comando `npm test` para visualizar os testes da tela de login
@@ -65,6 +84,8 @@ https://user-images.githubusercontent.com/93009735/180612873-1a238b7d-aafb-44bd-
 
 </br>
 </br>
+
+## 
 
 ## Link para github da aplicação back-end utilizada
 
