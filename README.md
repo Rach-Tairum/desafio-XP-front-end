@@ -5,6 +5,8 @@
 
 ---
 
+</br>
+
 ## Pré Concepções para realização da aplicação:
 
 - Toda a aplicação foi pensada para a melhor usabilidade do usuário;
@@ -24,6 +26,8 @@
 - Componente de carregamento enquando há resposta da API;
 
 ---
+
+</br>
 
 ## Instruções de uso:
 
@@ -47,13 +51,20 @@
 
 ---
 
-## Visualização da aplicação
-
-https://user-images.githubusercontent.com/93009735/180612873-1a238b7d-aafb-44bd-814b-336ede3d637f.mp4
+</br>
 
 ## Link do Deploy da Aplicação
 
 https://desafio-xp-front-end.vercel.app/
+
+</br>
+
+## Visualização da aplicação
+
+https://user-images.githubusercontent.com/93009735/180612873-1a238b7d-aafb-44bd-814b-336ede3d637f.mp4
+
+</br>
+</br>
 
 ## Link para github da aplicação back-end utilizada
 
